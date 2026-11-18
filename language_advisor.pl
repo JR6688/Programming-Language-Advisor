@@ -108,12 +108,11 @@ recommend('C++',
     lacks_trait(runs_in_browser).
 
 recommend('C++',
-          'Ideal for latency-critical software needing direct memory and hardware control.',
-          [constraint_profile(hardware_close),
-           high_speed_needed]) :-
-    has_trait(needs_max_speed),
+          'Ideal for embedded software and tools needing direct memory or hardware control.',
+          [constraint_profile(hardware_close)]) :-
     constraint_profile(hardware_close),
-    lacks_trait(runs_in_browser).
+    lacks_trait(runs_in_browser),
+    lacks_trait(native_mobile).
 
 
 % Outcome 4: Kotlin / Swift (2 rules)
@@ -144,11 +143,12 @@ recommend('Java',
     constraint_profile(enterprise_reliable).
 
 recommend('Java',
-          'Ideal for statically typed, cross-platform server-side systems.',
-          [target_platform(server_or_cloud),
-           constraint_profile(enterprise_reliable)]) :-
-    target_platform(server_or_cloud),
+          'Ideal for statically typed, cross-platform backend and desktop applications.',
+          [constraint_profile(enterprise_reliable)]) :-
     constraint_profile(enterprise_reliable),
+    lacks_trait(runs_in_browser),
+    lacks_trait(native_mobile),
+    lacks_trait(manages_relational_db),
     lacks_trait(needs_rapid_prototyping).
 
 
